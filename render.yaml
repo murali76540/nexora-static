@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: nexora-platform
+    env: node
+    plan: free
+    region: oregon
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        sync: false
+      - key: ORGANIZER_ACCESS_KEY
+        value: NEXORA-ORGANIZER-2026
+      - key: ADMIN_ACCESS_KEY
+        value: NEXORA-ADMIN-2026
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: HASH_SALT_ROUNDS
+        value: 10

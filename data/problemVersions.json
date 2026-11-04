@@ -1,0 +1,18 @@
+[
+  [
+    "comp-1793634709953-64nnxb-v1.0",
+    {
+      "id": "comp-1793634709953-64nnxb-v1.0",
+      "competitionId": "comp-1793634709953-64nnxb",
+      "versionNumber": "1.0",
+      "title": "QKD Phase Error Correction",
+      "realWorldBackground": "",
+      "problemStatement": "Implement decoy-state protocol with error rate under 3%.",
+      "technicalRequirements": [],
+      "constraints": [],
+      "immutable": false,
+      "publishedAt": "2026-11-02T15:51:49.961Z",
+      "updatedAt": "2026-11-02T15:51:49.961Z"
+    }
+  ]
+]

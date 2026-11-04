@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Official Competition Results — NEXORA | E.G.S. Pillay Engineering College</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+
+  <!-- Institutional Top Bar -->
+  <div class="inst-topbar">
+    <div class="inst-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+      <span>E.G.S. Pillay Engineering College, Nagapattinam</span>
+    </div>
+    <div>Standardized Seven-Criteria Ranking</div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="/index.html" class="navbar-brand">
+      <div class="brand-logo-mark">N</div>
+      <div class="brand-text-wrap">
+        <span class="brand-name">NEXORA</span>
+        <span class="brand-subtext">Official Leaderboard</span>
+      </div>
+    </a>
+    <div class="nav-actions">
+      <button class="theme-toggle-btn" title="Toggle Theme">🌓</button>
+      <div id="navAuthActions"></div>
+    </div>
+  </nav>
+
+  <!-- Results Main Container -->
+  <main class="container" style="padding: 3.5rem 1.5rem 5rem;">
+    <div style="text-align: center; max-width: 700px; margin: 0 auto 3rem;">
+      <span class="badge badge-cyan">Academic Competition Rankings</span>
+      <h1 style="font-size: 2.5rem; margin-top: 0.5rem; margin-bottom: 0.5rem;">Competition Leaderboard</h1>
+      <p>Results calculated using the standardized seven-criteria weighted evaluation system with Adaptability tie-breaker.</p>
+    </div>
+
+    <!-- Competition Selector -->
+    <div style="max-width: 480px; margin: 0 auto 2.5rem;">
+      <label class="form-label" style="text-align: center; display: block; margin-bottom: 0.5rem;">Select Engineering Competition</label>
+      <select id="leaderboardCompSelect" class="form-select" onchange="fetchLeaderboard(this.value)">
+        <option value="">Loading competitions...</option>
+      </select>
+    </div>
+
+    <!-- Hidden State Banner (Shown when unpublished to students) -->
+    <div id="hiddenLeaderboardCard" class="card" style="display: none; text-align: center; padding: 4rem 2rem; max-width: 680px; margin: 0 auto; border: 1px dashed var(--border-strong);">
+      <div style="font-size: 3rem; margin-bottom: 1rem;">🔒</div>
+      <h3 style="font-size: 1.5rem; margin-bottom: 0.75rem;">Leaderboard Confidentiality Active</h3>
+      <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem;">
+        Leaderboard results are temporarily hidden to maintain competition integrity. Final rankings will be published after evaluation.
+      </p>
+      <span class="badge badge-amber">Awaiting Organizer / Admin Final Publication</span>
+    </div>
+
+    <!-- Published Rankings Table -->
+    <div id="publishedLeaderboardCard" class="card" style="display: none;">
+      <div class="card-header">
+        <div>
+          <h3 class="card-title">Official Published Standings</h3>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">Ties resolved using Adaptability to Problem Shift (Criterion 3)</div>
+        </div>
+        <span class="badge badge-emerald">Verified Institutional Ledger</span>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table-custom">
+          <thead>
+            <tr>
+              <th style="width: 80px;">Rank</th>
+              <th>Participant / Team</th>
+              <th>Pathway</th>
+              <th>Total Score (100%)</th>
+              <th>Adaptability (20%)</th>
+              <th>Public Technical Feedback</th>
+            </tr>
+          </thead>
+          <tbody id="rankingsTableBody">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" style="padding: 2.5rem 0;">
+    <div class="container" style="text-align: center; color: var(--text-muted); font-size: 0.8rem;">
+      E.G.S. Pillay Engineering College, Nagapattinam &bull; NEXORA Platform Results
+    </div>
+  </footer>
+
+  <script src="/js/firebase-config.js"></script>
+  <script src="/js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const requestedComp = urlParams.get('comp');
+      const select = document.getElementById('leaderboardCompSelect');
+
+      try {
+        const compRes = await NexoraAPI.request('/competitions');
+        const comps = compRes.competitions || [];
+
+        if (comps.length === 0) {
+          select.innerHTML = '<option value="">No active competitions found</option>';
+          document.getElementById('hiddenLeaderboardCard').style.display = 'block';
+          document.getElementById('hiddenLeaderboardCard').innerHTML = `
+            <div style="font-size: 3rem; margin-bottom: 1rem;">📋</div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">No Results Available</h3>
+            <p style="color: var(--text-secondary);">No competitions have been created yet. Check back soon.</p>
+          `;
+          return;
+        }
+
+        select.innerHTML = comps.map(c => `
+          <option value="${c.id}">${c.title} (${c.department})</option>
+        `).join('');
+
+        let activeTarget = comps[0].id;
+        if (requestedComp && comps.some(c => c.id === requestedComp)) {
+          activeTarget = requestedComp;
+        }
+        select.value = activeTarget;
+        fetchLeaderboard(activeTarget);
+      } catch (err) {
+        select.innerHTML = '<option value="">Failed to load competitions</option>';
+      }
+    });
+
+    async function fetchLeaderboard(competitionId) {
+      if (!competitionId) return;
+      const hiddenCard = document.getElementById('hiddenLeaderboardCard');
+      const pubCard = document.getElementById('publishedLeaderboardCard');
+      const tbody = document.getElementById('rankingsTableBody');
+
+      try {
+        const res = await NexoraAPI.request(`/leaderboard/${competitionId}`);
+
+        if (!res.isPublished && (!res.rankings || res.rankings.length === 0)) {
+          hiddenCard.style.display = 'block';
+          pubCard.style.display = 'none';
+        } else {
+          hiddenCard.style.display = 'none';
+          pubCard.style.display = 'block';
+
+          if (res.rankings.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 2rem; color: var(--text-muted);">No evaluations published yet for this competition.</td></tr>';
+            return;
+          }
+
+          tbody.innerHTML = res.rankings.map(r => {
+            let rankBadge = `<span class="badge badge-muted">#${r.rank}</span>`;
+            if (r.rank === 1) rankBadge = `<span class="badge badge-amber" style="font-size: 0.9rem;">🥇 Rank 1</span>`;
+            if (r.rank === 2) rankBadge = `<span class="badge badge-cyan" style="font-size: 0.9rem;">🥈 Rank 2</span>`;
+            if (r.rank === 3) rankBadge = `<span class="badge badge-emerald" style="font-size: 0.9rem;">🥉 Rank 3</span>`;
+
+            return `
+              <tr>
+                <td>${rankBadge}</td>
+                <td>
+                  <strong>${r.participantName || r.userId}</strong>
+                </td>
+                <td><span class="badge ${r.pathway === 'WITHOUT_AI' ? 'badge-cyan' : 'badge-blue'}">${r.pathway}</span></td>
+                <td>
+                  <strong class="font-mono" style="font-size: 1.1rem; color: var(--accent-cyan);">${r.totalWeightedScore.toFixed(2)}</strong>
+                </td>
+                <td>
+                  <strong class="font-mono" style="color: var(--warning-amber);">${r.adaptabilityScore.toFixed(2)}</strong>
+                </td>
+                <td style="font-size: 0.85rem; color: var(--text-secondary); max-width: 340px;">
+                  ${r.publicFeedback || 'Evaluation concluded under standard rubric.'}
+                </td>
+              </tr>
+            `;
+          }).join('');
+        }
+      } catch (err) {
+        showToast('Error loading results: ' + err.message, 'error');
+      }
+    }
+  </script>
+</body>
+</html>

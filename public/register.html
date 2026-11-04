@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Member Registration — NEXORA | E.G.S. Pillay Engineering College</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body style="display: flex; flex-direction: column; min-height: 100vh;">
+
+  <!-- Institutional Top Bar -->
+  <div class="inst-topbar">
+    <div class="inst-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+      <span>E.G.S. Pillay Engineering College, Nagapattinam</span>
+    </div>
+    <div>Member-Only Public Enrollment</div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="/index.html" class="navbar-brand">
+      <div class="brand-logo-mark">N</div>
+      <div class="brand-text-wrap">
+        <span class="brand-name">NEXORA</span>
+        <span class="brand-subtext">Member Enrollment</span>
+      </div>
+    </a>
+    <div class="nav-actions">
+      <button class="theme-toggle-btn" title="Toggle Theme">🌓</button>
+      <a href="/login.html" class="btn btn-outline btn-sm">Sign In</a>
+    </div>
+  </nav>
+
+  <!-- Registration Main -->
+  <main style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 3rem 1.5rem;">
+    <div class="card" style="max-width: 540px; width: 100%; padding: 2.25rem;">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <span class="badge badge-emerald">Student Participant Account</span>
+        <h2 style="font-size: 1.65rem; margin-top: 0.5rem; margin-bottom: 0.25rem;">Register for NEXORA</h2>
+        <p style="font-size: 0.85rem; color: var(--text-secondary);">Exclusively for verified students of E.G.S. Pillay Engineering College</p>
+      </div>
+
+      <div id="registerError" class="form-error" style="margin-bottom: 1rem; text-align: center;"></div>
+
+      <form id="memberRegisterForm">
+        <div class="form-group">
+          <label class="form-label" for="regName">Full Name</label>
+          <input type="text" id="regName" class="form-input" placeholder="e.g. K. Vignesh Kumar" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regEmail">College Email Address (@egspec.edu)</label>
+          <input type="email" id="regEmail" class="form-input" placeholder="vignesh.k@egspec.edu" required autocomplete="email">
+          <span class="form-hint">Must end with <code style="color: var(--accent-cyan);">@egspec.edu</code>. Public emails like Gmail are prohibited.</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label class="form-label" for="regDepartment">Department</label>
+            <select id="regDepartment" class="form-select" required>
+              <option value="">Select Department</option>
+              <option value="Computer Science & Engineering">Computer Science & Engg</option>
+              <option value="Information Technology">Information Technology</option>
+              <option value="Electrical & Electronics Engineering">Electrical & Electronics</option>
+              <option value="Electronics & Communication">Electronics & Comm</option>
+              <option value="Mechanical Engineering">Mechanical Engineering</option>
+              <option value="Civil Engineering">Civil Engineering</option>
+              <option value="Biomedical Engineering">Biomedical Engineering</option>
+              <option value="AI & Data Science">AI & Data Science</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="regAcademicYear">Academic Year</label>
+            <select id="regAcademicYear" class="form-select" required>
+              <option value="">Select Year</option>
+              <option value="First Year">First Year (B.E./B.Tech)</option>
+              <option value="Second Year">Second Year (B.E./B.Tech)</option>
+              <option value="Third Year">Third Year (B.E./B.Tech)</option>
+              <option value="Final Year">Final Year (B.E./B.Tech)</option>
+              <option value="Postgraduate">Postgraduate (M.E./M.Tech/MCA)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regPassword">Create Password</label>
+          <div class="input-with-action">
+            <input type="password" id="regPassword" class="form-input" placeholder="••••••••" required minlength="6" autocomplete="new-password">
+            <button type="button" class="input-action-btn password-toggle-btn" data-target="regPassword">👁️</button>
+          </div>
+          <span class="form-hint">At least 6 characters.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regConfirmPassword">Confirm Password</label>
+          <div class="input-with-action">
+            <input type="password" id="regConfirmPassword" class="form-input" placeholder="••••••••" required minlength="6" autocomplete="new-password">
+            <button type="button" class="input-action-btn password-toggle-btn" data-target="regConfirmPassword">👁️</button>
+          </div>
+        </div>
+
+        <div style="background: rgba(16, 185, 129, 0.08); border-left: 3px solid var(--success-emerald); padding: 0.75rem; border-radius: var(--radius-sm); margin: 1.25rem 0; font-size: 0.75rem; color: var(--text-secondary);">
+          <strong>Automatic Participant Assignment:</strong> Your account will be provisioned directly as a Member Participant. Organizers and Admins access the platform via institutional keys on the Login page.
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full" style="padding: 0.85rem;">
+          Complete Member Registration
+        </button>
+      </form>
+
+      <div style="text-align: center; margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted);">
+        Already have a member account? <a href="/login.html" style="color: var(--accent-cyan); text-decoration: none; font-weight: 600;">Sign in here</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer" style="padding: 2rem 0;">
+    <div class="container" style="text-align: center; color: var(--text-muted); font-size: 0.8rem;">
+      E.G.S. Pillay Engineering College, Nagapattinam &bull; NEXORA Public Member Enrollment
+    </div>
+  </footer>
+
+  <script src="/js/firebase-config.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/auth.js"></script>
+</body>
+</html>

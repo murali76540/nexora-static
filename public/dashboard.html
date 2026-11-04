@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — NEXORA | E.G.S. Pillay Engineering College</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+
+  <!-- Disruption Broadcast Alert Banner -->
+  <div id="disruptionAlertBanner" style="display: none; background: #EF4444; color: #FFFFFF; padding: 0.75rem 1.5rem; font-size: 0.85rem; text-align: center; font-weight: 600;">
+    <span id="disruptionAlertText"></span>
+  </div>
+
+  <div class="dashboard-layout">
+
+    <!-- DASHBOARD SIDEBAR -->
+    <aside class="dashboard-sidebar">
+      <div class="sidebar-header">
+        <a href="/index.html" class="sidebar-brand">
+          <div class="brand-logo-mark" style="width: 32px; height: 32px; font-size: 1rem;">N</div>
+          <div class="brand-text-wrap">
+            <span class="brand-name" style="font-size: 1.15rem;">NEXORA</span>
+          </div>
+        </a>
+        <div class="sidebar-category-pill">
+          <span id="sidebarCategoryLabel">MEMBER CATEGORY</span>
+          <span style="font-size: 0.65rem; color: var(--accent-cyan);">VERIFIED</span>
+        </div>
+      </div>
+
+      <!-- Category Dynamic Nav Links -->
+      <nav id="sidebarNavItems" class="sidebar-nav">
+        <!-- Rendered by dashboard.js for authorized category only -->
+      </nav>
+
+      <!-- Sidebar User Footer -->
+      <div class="sidebar-footer">
+        <div class="user-mini-profile">
+          <div id="userAvatarChar" class="avatar-badge">M</div>
+          <div class="user-mini-meta">
+            <div id="userMiniName" class="user-mini-name">Student Member</div>
+            <div id="userMiniRole" class="user-mini-role">PARTICIPANT</div>
+          </div>
+        </div>
+        <button onclick="handleLogout()" class="theme-toggle-btn" title="Sign Out" style="width: 30px; height: 30px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+        </button>
+      </div>
+    </aside>
+
+    <!-- DASHBOARD MAIN AREA -->
+    <main class="dashboard-main">
+
+      <!-- Topbar -->
+      <header class="dashboard-topbar">
+        <div class="topbar-title-wrap">
+          <h2 id="topbarCategoryTitle">Institutional Dashboard</h2>
+          <div style="font-size: 0.75rem; color: var(--text-muted);">E.G.S. Pillay Engineering College, Nagapattinam</div>
+        </div>
+        <div class="topbar-actions">
+          <div style="position: relative;">
+            <a href="/results.html" class="btn btn-secondary btn-sm" title="View Competition Results">Leaderboard</a>
+            <span id="notifBadge" class="badge badge-red" style="display: none; position: absolute; top: -6px; right: -6px; padding: 0.15rem 0.4rem; font-size: 0.65rem;">0</span>
+          </div>
+          <button class="theme-toggle-btn" title="Toggle Theme">🌓</button>
+          <a href="/index.html" class="btn btn-outline btn-sm">Home</a>
+        </div>
+      </header>
+
+      <!-- Dynamic Category Views Container -->
+      <div class="dashboard-content">
+
+        <!-- ===================================================================
+             CATEGORY 1: MEMBER DASHBOARD
+             =================================================================== -->
+        <div id="memberDashboardContainer" style="display: none;">
+
+          <!-- Member Overview -->
+          <div id="member-overview" class="dashboard-view-section">
+            <div style="margin-bottom: 2rem;">
+              <h1 style="font-size: 1.75rem;">Welcome to Member Workspace</h1>
+              <p>Explore real-world challenges, choose your problem-solving pathway, and adapt to live engineering shifts.</p>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+              <div class="stat-card">
+                <span class="stat-label">Enrolled Challenges</span>
+                <span id="memberJoinedCount" class="stat-value">0</span>
+                <span class="stat-desc">Active institutional competitions</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">Active Submissions</span>
+                <span id="memberActiveSubCount" class="stat-value">0</span>
+                <span class="stat-desc">Verified initial solutions</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">Upcoming Shifts</span>
+                <span class="stat-value" style="color: var(--warning-amber);">V2.0</span>
+                <span class="stat-desc">Real-time disruption monitor</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">Ledger Integrity</span>
+                <span class="stat-value" style="color: var(--accent-cyan); font-size: 1.25rem;">SHA-256</span>
+                <span class="stat-desc">Receipts cryptographically verified</span>
+              </div>
+            </div>
+
+            <!-- Joined Challenges Quick List -->
+            <div class="card" style="margin-bottom: 2rem;">
+              <div class="card-header">
+                <h3 class="card-title">My Joined Challenges</h3>
+                <a href="#member-browse" onclick="switchSection('member-browse', null)" class="btn btn-outline btn-sm">Explore More</a>
+              </div>
+              <div id="memberJoinedList">
+                <div style="color: var(--text-muted); padding: 1rem;">Loading your enrolled challenges...</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Member Problem Statement Dashboard Dedicated Section -->
+          <div id="member-problems" class="dashboard-view-section" style="display: none;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+              <div>
+                <h2>Problem Statement Dashboard</h2>
+                <p>Official challenge statements, real-world technical requirements, and operational constraints.</p>
+              </div>
+              <button onclick="loadMemberProblems()" class="btn btn-outline btn-sm">↻ Refresh Problem Status</button>
+            </div>
+            <div id="memberProblemsList">
+              <div style="color: var(--text-muted); padding: 1.5rem;">Loading problem statements...</div>
+            </div>
+          </div>
+
+          <!-- My Joined Challenges Dedicated Section -->
+          <div id="member-joined" class="dashboard-view-section" style="display: none;">
+            <div style="margin-bottom: 1.5rem;">
+              <h2>Enrolled Challenges</h2>
+              <p>Launch your challenge workspace and submit initial or revision solutions.</p>
+            </div>
+            <div id="memberJoinedDetailedList"></div>
+          </div>
+
+          <!-- Join Active Challenges Section -->
+          <div id="member-browse" class="dashboard-view-section" style="display: none;">
+            <div style="margin-bottom: 1.5rem;">
+              <h2>Active Engineering Competitions</h2>
+              <p>Participate in departmental challenges with a maximum 100-student cap per competition.</p>
+            </div>
+            <div id="competitionsGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;"></div>
+          </div>
+
+          <!-- Submission History Section -->
+          <div id="member-history" class="dashboard-view-section" style="display: none;">
+            <div style="margin-bottom: 1.5rem;">
+              <h2>Cryptographic Submission Ledger</h2>
+              <p>Every initial and revision submission generates a tamper-evident server receipt with SHA-256 hash.</p>
+            </div>
+            <div class="table-responsive">
+              <table class="table-custom">
+                <thead>
+                  <tr>
+                    <th>Receipt ID</th>
+                    <th>Solution Title</th>
+                    <th>Version</th>
+                    <th>Hash (SHA-256)</th>
+                    <th>Verification</th>
+                  </tr>
+                </thead>
+                <tbody id="memberSubHistoryTable">
+                  <tr><td colspan="5" style="text-align: center; color: var(--text-muted);">Loading ledger records...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ===================================================================
+             CATEGORY 2: ORGANISER DASHBOARD (Includes Scoped Judge Evaluation)
+             =================================================================== -->
+        <div id="organizerDashboardContainer" style="display: none;">
+
+          <!-- Competition Management -->
+          <div id="org-competitions" class="dashboard-view-section">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+              <div>
+                <h2>Competition Management</h2>
+                <p>Deploy competitions, configure participant limits, and monitor live rosters.</p>
+              </div>
+            </div>
+
+            <!-- Create Competition Card -->
+            <div class="card" style="margin-bottom: 2.5rem;">
+              <div class="card-header">
+                <h3 class="card-title">Deploy New Competition</h3>
+                <span class="badge badge-blue">Organizer Privilege</span>
+              </div>
+              <form id="orgCreateCompForm" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="form-group" style="grid-column: 1/-1;">
+                  <label class="form-label">Competition Title</label>
+                  <input type="text" id="newCompTitle" class="form-input" placeholder="e.g. Autonomous Smart Microgrid Load Balancer" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Department</label>
+                  <input type="text" id="newCompDept" class="form-input" placeholder="e.g. Electrical & Electronics Engineering" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Participant Limit (Max 100)</label>
+                  <input type="number" id="newCompLimit" class="form-input" value="100" min="1" max="100" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Competition Starting Time</label>
+                  <input type="datetime-local" id="newCompStartTime" class="form-input" required>
+                  <span class="form-hint">Problem statements unlock for members at this time</span>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Initial Submission Deadline</label>
+                  <input type="datetime-local" id="newCompDeadline" class="form-input" required>
+                  <span class="form-hint">Deadline for Stage 04 initial submissions</span>
+                </div>
+                <div class="form-group" style="grid-column: 1/-1;">
+                  <label class="form-label">Description & Real-World Background</label>
+                  <textarea id="newCompDesc" class="form-textarea" rows="3" placeholder="Context of industrial problem..." required></textarea>
+                </div>
+                <div style="grid-column: 1/-1; background: rgba(37, 99, 235, 0.08); padding: 0.75rem; border-radius: var(--radius-sm); font-size: 0.8rem; color: var(--text-secondary);">
+                  ℹ️ <strong>Problem Statement Notice:</strong> The competition will be created without any problem statement. You can configure and update the problem statement in the Problem Versioning tab below.
+                </div>
+                <div style="grid-column: 1/-1;">
+                  <button type="submit" class="btn btn-primary">Deploy Competition to Ledger</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Active Competitions Table -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Live Competition Registry</h3>
+              </div>
+              <div class="table-responsive">
+                <table class="table-custom">
+                  <thead>
+                    <tr>
+                      <th>Challenge Title</th>
+                      <th>Version</th>
+                      <th>Enrollment</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="orgCompetitionsTable">
+                    <tr><td colspan="5" style="text-align: center; color: var(--text-muted);">Loading competitions...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Problem Versioning (V1 & V2 Disruption) -->
+          <div id="org-problem" class="dashboard-view-section" style="display: none;">
+            <div style="margin-bottom: 2rem;">
+              <h2>Problem Versioning Engine</h2>
+              <p>Configure problem statements based on competition starting time and deploy Version 2.0 operational disruptions.</p>
+            </div>
+
+            <!-- Version 1.0 Problem Statement Creation / Update Form -->
+            <div class="card" style="border-left: 4px solid var(--accent-cyan); margin-bottom: 2.5rem;">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title" style="color: var(--accent-cyan);">📋 Update / Publish Problem Statement (Version 1.0)</h3>
+                  <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">
+                    Problem statements remain locked and are revealed to participants only when the competition starting time is reached.
+                  </div>
+                </div>
+                <span class="badge badge-cyan">Admin / Organizer Specification</span>
+              </div>
+              <form id="updateV1ProblemForm">
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                  <div class="form-group">
+                    <label class="form-label">Target Competition</label>
+                    <select id="v1TargetComp" class="form-select org-comp-selector" required></select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Competition Starting Time</label>
+                    <input type="datetime-local" id="v1CompStartTime" class="form-input">
+                    <span class="form-hint">Problem statement unlocks for members at this time</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Problem Statement Title</label>
+                  <input type="text" id="v1ProblemTitle" class="form-input" placeholder="e.g. Autonomous Smart Microgrid Dispatching & Frequency Regulation" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Real-World Engineering Background</label>
+                  <textarea id="v1RealWorldBackground" class="form-textarea" rows="2" placeholder="Industrial context, real-world engineering setup in Nagapattinam/Tamil Nadu..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Core Problem Statement Specifications</label>
+                  <textarea id="v1ProblemStatement" class="form-textarea" rows="4" placeholder="Detailed engineering problem description and operational expectations..." required></textarea>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
+                  <div class="form-group">
+                    <label class="form-label">Technical Requirements (One per line)</label>
+                    <textarea id="v1TechnicalReqs" class="form-textarea" rows="3" placeholder="Frequency regulation within 49.5Hz - 50.5Hz&#10;Battery state of charge maintained 20% - 85%"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Operational Constraints (One per line)</label>
+                    <textarea id="v1Constraints" class="form-textarea" rows="3" placeholder="Standard compute power assumed&#10;Stable telemetry network connection"></textarea>
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Publish / Update Problem Statement for Competition</button>
+              </form>
+            </div>
+
+            <!-- Version 2.0 Shift Form -->
+            <div class="card" style="border-left: 4px solid var(--danger-red); margin-bottom: 2rem;">
+              <div class="card-header">
+                <h3 class="card-title" style="color: #F87171;">⚡ Drop Unexpected Problem Shift (Version 2.0)</h3>
+                <span class="badge badge-impact-critical">Disruption Engine</span>
+              </div>
+              <form id="publishV2DisruptionForm">
+                <div class="form-group">
+                  <label class="form-label">Target Competition</label>
+                  <select id="v2TargetComp" class="form-select org-comp-selector" required></select>
+                </div>
+                <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 1rem;">
+                  <div class="form-group">
+                    <label class="form-label">Disruption Type</label>
+                    <input type="text" id="v2DisruptionType" class="form-input" placeholder="e.g. Sensor Telemetry Outage / Power Grid Failure" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Impact Classification</label>
+                    <select id="v2ImpactLevel" class="form-select" required>
+                      <option value="CRITICAL">CRITICAL</option>
+                      <option value="MEDIUM">MEDIUM</option>
+                      <option value="LOW">LOW</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Deadline Extension (Hours)</label>
+                    <input type="number" id="v2ExtensionHours" class="form-input" value="24" min="0">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Updated Problem Statement (V2.0)</label>
+                  <textarea id="v2UpdatedStatement" class="form-textarea" rows="3" placeholder="Describe the unexpected crisis or change in operational environment..." required></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">New Technical Constraints (One per line)</label>
+                  <textarea id="v2NewReqs" class="form-textarea" rows="3" placeholder="Execute localized fallback without live telemetry&#10;Operate under 100ms response timeout"></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Explanation of Changes</label>
+                  <input type="text" id="v2Explanation" class="form-input" placeholder="Real-world engineering rationale...">
+                </div>
+                <button type="submit" class="btn btn-danger">Broadcast Version 2.0 Disruption to Participants</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Submissions Management -->
+          <div id="org-submissions" class="dashboard-view-section" style="display: none;">
+            <div style="margin-bottom: 2rem;">
+              <h2>Submissions & Receipts Review</h2>
+              <p>Inspect initial and revised solutions, repository links, and AI declarations.</p>
+            </div>
+            <div class="card">
+              <div class="table-responsive">
+                <table class="table-custom">
+                  <thead>
+                    <tr>
+                      <th>Participant</th>
+                      <th>Competition</th>
+                      <th>Version</th>
+                      <th>Pathway</th>
+                      <th>Receipt ID</th>
+                      <th>Hash</th>
+                    </tr>
+                  </thead>
+                  <tbody id="orgSubmissionsTable">
+                    <tr><td colspan="6" style="text-align: center; color: var(--text-muted); padding: 1.5rem;">Select competition from above or browse submissions.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scoped Judge Evaluation (7-Criteria Rubric) -->
+          <div id="org-judge" class="dashboard-view-section" style="display: none;">
+            <div style="margin-bottom: 2rem;">
+              <h2>Authorized Scoped Judge Evaluation</h2>
+              <p>Standardized seven-criteria weighted scoring matrix with Adaptability tie-breaker.</p>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Score Participant Submission</h3>
+                <span class="badge badge-cyan">Seven Criteria Matrix</span>
+              </div>
+              <form id="judgeEvaluationForm">
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                  <div class="form-group">
+                    <label class="form-label">Competition</label>
+                    <select id="evalTargetComp" class="form-select org-comp-selector" required></select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Participant Student ID or Email</label>
+                    <input type="text" id="evalTargetUser" class="form-input" placeholder="student@egspec.edu" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Evaluated Pathway</label>
+                    <select id="evalPathway" class="form-select">
+                      <option value="AI_ASSISTED">Pathway A: AI-Assisted</option>
+                      <option value="WITHOUT_AI">Pathway B: Without AI</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Rubric Scoring Matrix Table -->
+                <div style="background: var(--bg-secondary); border-radius: var(--radius-sm); padding: 1rem; margin-bottom: 1.5rem;">
+                  <div class="rubric-grid rubric-header">
+                    <span>Evaluation Criterion</span>
+                    <span>Standard Weight</span>
+                    <span>Score (0 - 100)</span>
+                  </div>
+
+                  <div class="rubric-grid">
+                    <span>1. Problem Understanding</span>
+                    <span class="rubric-weight-badge">15%</span>
+                    <input type="number" id="scorePU" class="form-input rubric-score-input" min="0" max="100" value="85" required>
+                  </div>
+
+                  <div class="rubric-grid">
+                    <span>2. Technical Depth</span>
+                    <span class="rubric-weight-badge">15%</span>
+                    <input type="number" id="scoreTD" class="form-input rubric-score-input" min="0" max="100" value="85" required>
+                  </div>
+
+                  <div class="rubric-grid" style="background: rgba(245, 158, 11, 0.08); padding: 0.5rem; border-radius: 4px;">
+                    <span style="color: var(--warning-amber); font-weight: 700;">3. Adaptability to Problem Shift</span>
+                    <span class="rubric-weight-badge" style="color: var(--warning-amber);">20% (Tie-Breaker)</span>
+                    <input type="number" id="scoreAD" class="form-input rubric-score-input" min="0" max="100" value="90" required>
+                  </div>
+
+                  <div class="rubric-grid">
+                    <span>4. Code Completeness</span>
+                    <span class="rubric-weight-badge">15%</span>
+                    <input type="number" id="scoreCC" class="form-input rubric-score-input" min="0" max="100" value="80" required>
+                  </div>
+
+                  <div class="rubric-grid">
+                    <span>5. Practical Feasibility</span>
+                    <span class="rubric-weight-badge">15%</span>
+                    <input type="number" id="scorePF" class="form-input rubric-score-input" min="0" max="100" value="85" required>
+                  </div>
+
+                  <div class="rubric-grid">
+                    <span>6. Pathway Integrity</span>
+                    <span class="rubric-weight-badge">10%</span>
+                    <input type="number" id="scorePI" class="form-input rubric-score-input" min="0" max="100" value="95" required>
+                  </div>
+
+                  <div class="rubric-grid">
+                    <span>7. Innovation</span>
+                    <span class="rubric-weight-badge">10%</span>
+                    <input type="number" id="scoreIN" class="form-input rubric-score-input" min="0" max="100" value="80" required>
+                  </div>
+
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--border-subtle);">
+                    <strong style="font-size: 1rem;">Composite Weighted Score:</strong>
+                    <strong id="liveTotalWeightedScore" class="font-mono" style="font-size: 1.35rem; color: var(--accent-cyan);">85.25</strong>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Public Constructive Feedback (Visible on published leaderboard)</label>
+                  <textarea id="evalPublicFeedback" class="form-textarea" rows="2" placeholder="Clear technical feedback on architecture and adaptability..."></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" style="color: var(--danger-red);">Private Judge Moderation Notes (CONFIDENTIAL — Never revealed to participant)</label>
+                  <textarea id="evalPrivateNotes" class="form-textarea" rows="2" placeholder="Internal moderation remarks, code similarity review, judge committee notes..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full">Commit Authorized Evaluation</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Leaderboard Management -->
+          <div id="org-leaderboard" class="dashboard-view-section" style="display: none;">
+            <div style="margin-bottom: 2rem;">
+              <h2>Leaderboard Visibility Controls</h2>
+              <p>Default status is HIDDEN from participants to maintain competition integrity.</p>
+            </div>
+
+            <div class="card" style="margin-bottom: 2rem;">
+              <div class="card-header">
+                <h3 class="card-title">Publication Toggle</h3>
+              </div>
+              <div class="form-group" style="max-width: 450px; margin-bottom: 1.25rem;">
+                <label class="form-label">Select Competition</label>
+                <select id="orgLeaderboardCompSelect" class="form-select org-comp-selector"></select>
+              </div>
+              <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                <button onclick="toggleSelectedLeaderboard(true)" class="btn btn-cyan">
+                  Publish Leaderboard (Make Public)
+                </button>
+                <button onclick="toggleSelectedLeaderboard(false)" class="btn btn-secondary">
+                  Hide Leaderboard (Keep Confidential)
+                </button>
+                <button onclick="previewSelectedLeaderboard()" class="btn btn-outline">
+                  Preview Leaderboard &rarr;
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ===================================================================
+             CATEGORY 3: ADMIN DASHBOARD
+             =================================================================== -->
+        <div id="adminDashboardContainer" style="display: none;">
+
+          <!-- Admin Overview -->
+          <div id="admin-overview" class="dashboard-view-section">
+            <div style="margin-bottom: 2rem;">
+              <h2>System Architecture Overview</h2>
+              <p>Institutional oversight, audit logs, and server health for E.G.S. Pillay Engineering College.</p>
+            </div>
+
+            <div class="stats-grid">
+              <div class="stat-card">
+                <span class="stat-label">Total Users</span>
+                <span id="adminMetricUsers" class="stat-value">0</span>
+                <span class="stat-desc">Registered institutional members</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">Competitions</span>
+                <span id="adminMetricComps" class="stat-value">0</span>
+                <span class="stat-desc">Configured challenges</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">Total Submissions</span>
+                <span id="adminMetricSubs" class="stat-value">0</span>
+                <span class="stat-desc">Cryptographic receipts</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">System Health</span>
+                <span id="adminMetricHealth" class="stat-value" style="color: var(--success-emerald); font-size: 1.25rem;">ONLINE</span>
+                <span class="stat-desc">Uptime: <span id="adminMetricUptime">0 min</span></span>
+              </div>
+            </div>
+
+            <!-- Database & Server Storage Engine -->
+            <div class="card" style="margin-top: 2rem;">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">Institutional Database & Storage Engine</h3>
+                  <div style="font-size: 0.8rem; color: var(--text-muted);">Atomic persistent data store for all competitions, submissions, and cryptographic receipts.</div>
+                </div>
+                <button onclick="triggerDatabaseBackup()" class="btn btn-outline btn-sm">Create Database Backup Snapshot</button>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 0.5rem;">
+                <div style="background: var(--bg-secondary); padding: 1rem; border-radius: var(--radius-sm);">
+                  <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Connection Status</div>
+                  <strong id="adminDbStatus" style="color: var(--success-emerald); font-size: 1rem;">CONNECTED</strong>
+                </div>
+                <div style="background: var(--bg-secondary); padding: 1rem; border-radius: var(--radius-sm);">
+                  <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Database Ledger Records</div>
+                  <strong id="adminDbRecords" class="font-mono" style="color: var(--accent-cyan); font-size: 1rem;">0 records</strong>
+                </div>
+                <div style="background: var(--bg-secondary); padding: 1rem; border-radius: var(--radius-sm);">
+                  <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Disk Storage Size</div>
+                  <strong id="adminDbSize" class="font-mono" style="color: var(--text-primary); font-size: 1rem;">0 KB</strong>
+                </div>
+                <div style="background: var(--bg-secondary); padding: 1rem; border-radius: var(--radius-sm);">
+                  <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Storage Location</div>
+                  <strong id="adminDbPath" class="font-mono" style="color: var(--text-muted); font-size: 0.75rem;">./data</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- User Management -->
+          <div id="admin-users" class="dashboard-view-section" style="display: none;">
+            <div style="margin-bottom: 2rem;">
+              <h2>User Management & Roles</h2>
+              <p>Promote or demote roles, suspend accounts, and review student status.</p>
+            </div>
+            <div class="card">
+              <div class="table-responsive">
+                <table class="table-custom">
+                  <thead>
+                    <tr>
+                      <th>User Details</th>
+                      <th>Current Role</th>
+                      <th>Department</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="adminUsersTable">
+                    <tr><td colspan="5" style="text-align: center; color: var(--text-muted);">Loading users...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Master Leaderboard Control -->
+          <div id="admin-leaderboard" class="dashboard-view-section" style="display: none;">
+            <div style="margin-bottom: 2rem;">
+              <h2>Master Leaderboard Control</h2>
+              <p>Administrator override to publish or conceal results across all competitions.</p>
+            </div>
+            <div class="card">
+              <div class="form-group" style="max-width: 450px; margin-bottom: 1.25rem;">
+                <label class="form-label">Select Target Competition</label>
+                <select id="adminLeaderboardCompSelect" class="form-select admin-comp-selector"></select>
+              </div>
+              <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <button onclick="toggleAdminSelectedLeaderboard(true)" class="btn btn-primary">
+                  Master Override: Publish Results
+                </button>
+                <button onclick="toggleAdminSelectedLeaderboard(false)" class="btn btn-danger">
+                  Master Override: Hide Results
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Security Audit Logs (Append-Only) -->
+          <div id="admin-audit" class="dashboard-view-section" style="display: none;">
+            <div style="margin-bottom: 2rem;">
+              <h2>Append-Only Security Audit Ledger</h2>
+              <p>Tamper-proof chronological log of authentication events, access denials, and ledger writes.</p>
+            </div>
+            <div class="card">
+              <div id="adminAuditFeed" class="audit-feed">
+                <div style="color: var(--text-muted); padding: 1rem;">Loading security audit ledger...</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Competition Roster Modal (Organizer / Admin) -->
+  <div id="rosterModal" class="modal-overlay">
+    <div class="modal-container" style="max-width: 720px;">
+      <div class="card-header">
+        <h3 class="card-title">Enrolled Participants Roster</h3>
+        <button onclick="closeRosterModal()" style="background:none; border:none; color:var(--text-muted); font-size:1.25rem; cursor:pointer;">✕</button>
+      </div>
+      <div id="rosterModalContent" style="margin-top: 1rem; max-height: 400px; overflow-y: auto;">
+        <div style="color: var(--text-muted); padding: 1rem;">Loading roster records...</div>
+      </div>
+      <div style="margin-top: 1.5rem; text-align: right;">
+        <button onclick="closeRosterModal()" class="btn btn-secondary">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cryptographic Receipt Modal -->
+  <div id="receiptModal" class="modal-overlay">
+    <div class="modal-container">
+      <div class="card-header">
+        <h3 class="card-title">Cryptographic Receipt Verification</h3>
+        <button onclick="closeReceiptModal()" style="background:none; border:none; color:var(--text-muted); font-size:1.25rem; cursor:pointer;">✕</button>
+      </div>
+      <div class="receipt-card" style="margin-top: 1rem;">
+        <div class="receipt-header">
+          <div>
+            <div style="font-size: 0.75rem; color: var(--text-muted);">RECEIPT IDENTIFIER</div>
+            <div id="modalReceiptId" class="receipt-id">NEX-SUB-XXXXXXXX-XXXXXXXX</div>
+          </div>
+          <span class="badge badge-emerald">VERIFIED</span>
+        </div>
+        <div style="font-size: 0.8rem; margin-bottom: 0.75rem;">
+          <div style="color: var(--text-muted);">CANONICAL SHA-256 HASH</div>
+          <div id="modalReceiptHash" class="receipt-hash-row">...</div>
+        </div>
+        <div style="font-size: 0.75rem; color: var(--text-muted);">
+          TIMESTAMP: <span id="modalReceiptTimestamp" class="font-mono"></span>
+        </div>
+      </div>
+      <div style="margin-top: 1.5rem; text-align: center;">
+        <button onclick="closeReceiptModal()" class="btn btn-primary">Close Receipt</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/firebase-config.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/competitions.js"></script>
+  <script src="/js/dashboard.js"></script>
+  <script src="/js/notifications.js"></script>
+</body>
+</html>

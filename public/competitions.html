@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engineering Competitions Catalog — NEXORA | E.G.S. Pillay Engineering College</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+
+  <!-- Institutional Top Bar -->
+  <div class="inst-topbar">
+    <div class="inst-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+      <span>E.G.S. Pillay Engineering College, Nagapattinam</span>
+    </div>
+    <div>Departmental Challenge Catalog</div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="/index.html" class="navbar-brand">
+      <div class="brand-logo-mark">N</div>
+      <div class="brand-text-wrap">
+        <span class="brand-name">NEXORA</span>
+        <span class="brand-subtext">Competitions Directory</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/index.html" class="nav-link">Home</a></li>
+      <li><a href="/competitions.html" class="nav-link active">Competitions</a></li>
+      <li><a href="/rules.html" class="nav-link">Rules</a></li>
+      <li><a href="/results.html" class="nav-link">Leaderboard</a></li>
+      <li><a href="/about.html" class="nav-link">About</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-toggle-btn" title="Toggle Theme">🌓</button>
+      <div id="navAuthActions"></div>
+    </div>
+  </nav>
+
+  <!-- Competitions Directory Main -->
+  <main class="container" style="padding: 4rem 1.5rem 6rem;">
+    <div style="margin-bottom: 3rem;">
+      <span class="badge badge-blue">Active Engineering Challenges</span>
+      <h1 style="font-size: 2.5rem; margin: 0.5rem 0;">Explore Competitions</h1>
+      <p style="max-width: 650px;">
+        Solve unpredictable industry challenges. Enroll before the 100-student cap is reached and prepare for real-time Version 2.0 technical disruptions.
+      </p>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="card" style="padding: 1.25rem; margin-bottom: 2.5rem;">
+      <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1rem;">
+        <div>
+          <label class="form-label" for="compSearchInput">Search Challenges</label>
+          <input type="text" id="compSearchInput" class="form-input" placeholder="Search by challenge title or keywords...">
+        </div>
+        <div>
+          <label class="form-label" for="deptFilterSelect">Department Filter</label>
+          <select id="deptFilterSelect" class="form-select">
+            <option value="">All Engineering Departments</option>
+            <option value="Electrical & Electronics">Electrical & Electronics</option>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Biomedical">Biomedical Engineering</option>
+            <option value="Mechanical">Mechanical Engineering</option>
+            <option value="Civil">Civil Engineering</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Competitions Grid -->
+    <div id="competitionsGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.5rem;">
+      <!-- Populated via competitions.js -->
+    </div>
+  </main>
+
+  <!-- Enrollment Modal -->
+  <div id="joinModal" class="modal-overlay">
+    <div class="modal-container">
+      <div class="card-header">
+        <h3 class="card-title">Enroll in Challenge</h3>
+        <button onclick="closeJoinModal()" style="background: none; border: none; color: var(--text-muted); font-size: 1.25rem; cursor: pointer;">✕</button>
+      </div>
+      <p id="joinModalCompTitle" style="font-weight: 600; color: var(--accent-cyan); margin-bottom: 1.5rem;"></p>
+      
+      <div class="form-group">
+        <label class="form-label">Select Problem-Solving Pathway</label>
+        <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.5rem;">
+          <label style="display: flex; align-items: flex-start; gap: 0.75rem; background: var(--bg-secondary); padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); cursor: pointer;">
+            <input type="radio" name="selectedPathway" value="AI_ASSISTED" checked style="margin-top: 0.25rem;">
+            <div>
+              <strong>Pathway A: AI-Assisted</strong>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Use LLMs/AI with transparent prompt declarations</div>
+            </div>
+          </label>
+
+          <label style="display: flex; align-items: flex-start; gap: 0.75rem; background: var(--bg-secondary); padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); cursor: pointer;">
+            <input type="radio" name="selectedPathway" value="WITHOUT_AI" style="margin-top: 0.25rem;">
+            <div>
+              <strong>Pathway B: Without AI</strong>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Native algorithmic & first-principles problem solving</div>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+        <button onclick="closeJoinModal()" class="btn btn-secondary" style="flex: 1;">Cancel</button>
+        <button id="confirmJoinBtn" onclick="confirmJoinCompetition()" class="btn btn-primary" style="flex: 2;">Confirm Enrollment</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container" style="text-align: center; color: var(--text-muted); font-size: 0.8rem;">
+      E.G.S. Pillay Engineering College, Nagapattinam &bull; NEXORA Platform
+    </div>
+  </footer>
+
+  <script src="/js/firebase-config.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/competitions.js"></script>
+</body>
+</html>

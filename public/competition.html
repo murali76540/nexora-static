@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Competition Details — NEXORA | E.G.S. Pillay Engineering College</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="inst-topbar">
+    <div class="inst-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+      <span>E.G.S. Pillay Engineering College, Nagapattinam</span>
+    </div>
+    <div>Challenge Dossier</div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="/index.html" class="navbar-brand">
+      <div class="brand-logo-mark">N</div>
+      <div class="brand-text-wrap">
+        <span class="brand-name">NEXORA</span>
+        <span class="brand-subtext">Challenge Dossier</span>
+      </div>
+    </a>
+    <div class="nav-actions">
+      <button class="theme-toggle-btn" title="Toggle Theme">🌓</button>
+      <div id="navAuthActions"></div>
+    </div>
+  </nav>
+
+  <!-- Competition Detail Main -->
+  <main class="container container-narrow" style="padding: 4rem 1.5rem 6rem;">
+    <div style="margin-bottom: 2rem;">
+      <a href="/competitions.html" style="color: var(--text-muted); text-decoration: none; font-size: 0.85rem;">&larr; Back to Competitions</a>
+      <div style="display: flex; gap: 0.5rem; align-items: center; margin-top: 1rem; margin-bottom: 0.5rem;">
+        <span id="detailDept" class="badge badge-blue">Department</span>
+        <span id="detailStatus" class="badge badge-emerald">ACTIVE</span>
+      </div>
+      <h1 id="detailTitle" style="font-size: 2.25rem; line-height: 1.25; margin-bottom: 1rem;">Loading Challenge...</h1>
+      <p id="detailDesc" style="font-size: 1.05rem; color: var(--text-secondary); line-height: 1.6;"></p>
+    </div>
+
+    <!-- Metadata Card -->
+    <div class="card" style="margin-bottom: 2.5rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; text-align: center;">
+      <div>
+        <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Participant Cap</div>
+        <div id="detailSlots" class="font-mono" style="font-size: 1.5rem; font-weight: 700; color: var(--accent-cyan); margin-top: 0.25rem;">100 Max</div>
+      </div>
+      <div>
+        <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Current Version</div>
+        <div id="detailVersion" class="font-mono" style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-top: 0.25rem;">v1.0</div>
+      </div>
+      <div>
+        <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Initial Deadline</div>
+        <div id="detailDeadline" class="font-mono" style="font-size: 1rem; font-weight: 700; color: var(--warning-amber); margin-top: 0.5rem;">TBD</div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div style="display: flex; gap: 1rem; margin-bottom: 3rem;">
+      <button id="enrollActionBtn" class="btn btn-primary btn-lg" style="flex: 2;">
+        Enroll in this Competition
+      </button>
+      <a id="workspaceDirectLink" href="#" class="btn btn-secondary btn-lg" style="flex: 1; display: none;">
+        Open Workspace &rarr;
+      </a>
+    </div>
+
+    <!-- Problem Outline -->
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Challenge Lifecycle Expectations</h3>
+        <span class="badge badge-cyan">Adaptive Architecture</span>
+      </div>
+      <div style="font-size: 0.9rem; line-height: 1.7; color: var(--text-secondary);">
+        <p style="margin-bottom: 1rem;">
+          Participants will initially receive Version 1.0 specifications and develop their baseline solution using either Pathway A (AI-Assisted) or Pathway B (Without AI).
+        </p>
+        <p style="margin-bottom: 1rem;">
+          During the competition, organizers will introduce unexpected disruptions (Version 2.0 shift) such as sensor dropouts, latency spikes, or altered operating constraints. Participants must adapt their architecture and submit an adaptive revision.
+        </p>
+        <p>
+          Both pathways are evaluated under identical standardized seven-criteria weights with the Adaptability score serving as the primary tie-breaker.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Enrollment Modal -->
+  <div id="joinModal" class="modal-overlay">
+    <div class="modal-container">
+      <div class="card-header">
+        <h3 class="card-title">Enroll in Challenge</h3>
+        <button onclick="closeJoinModal()" style="background: none; border: none; color: var(--text-muted); font-size: 1.25rem; cursor: pointer;">✕</button>
+      </div>
+      <p id="joinModalCompTitle" style="font-weight: 600; color: var(--accent-cyan); margin-bottom: 1.5rem;"></p>
+      
+      <div class="form-group">
+        <label class="form-label">Select Problem-Solving Pathway</label>
+        <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.5rem;">
+          <label style="display: flex; align-items: flex-start; gap: 0.75rem; background: var(--bg-secondary); padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); cursor: pointer;">
+            <input type="radio" name="selectedPathway" value="AI_ASSISTED" checked style="margin-top: 0.25rem;">
+            <div>
+              <strong>Pathway A: AI-Assisted</strong>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Use LLMs/AI with full prompt disclosure & verification</div>
+            </div>
+          </label>
+
+          <label style="display: flex; align-items: flex-start; gap: 0.75rem; background: var(--bg-secondary); padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); cursor: pointer;">
+            <input type="radio" name="selectedPathway" value="WITHOUT_AI" style="margin-top: 0.25rem;">
+            <div>
+              <strong>Pathway B: Without AI</strong>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Pure engineering, native algorithm & mathematical logic</div>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+        <button onclick="closeJoinModal()" class="btn btn-secondary" style="flex: 1;">Cancel</button>
+        <button id="confirmJoinBtn" onclick="confirmJoinCompetition()" class="btn btn-primary" style="flex: 2;">Confirm Enrollment</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container" style="text-align: center; color: var(--text-muted); font-size: 0.8rem;">
+      E.G.S. Pillay Engineering College, Nagapattinam &bull; NEXORA Platform
+    </div>
+  </footer>
+
+  <script src="/js/firebase-config.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/competitions.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      let id = urlParams.get('id');
+
+      if (!id) {
+        try {
+          const listRes = await NexoraAPI.request('/competitions');
+          if (listRes.competitions && listRes.competitions.length > 0) {
+            id = listRes.competitions[0].id;
+          }
+        } catch (e) {}
+      }
+
+      if (!id) {
+        document.getElementById('detailTitle').textContent = 'No Competition Selected';
+        document.getElementById('detailDesc').textContent = 'Please browse the competition directory to select and participate in an engineering challenge.';
+        const enrollBtn = document.getElementById('enrollActionBtn');
+        if (enrollBtn) {
+          enrollBtn.textContent = 'Browse Competitions Catalog';
+          enrollBtn.onclick = () => window.location.href = '/competitions.html';
+        }
+        return;
+      }
+
+      try {
+        const res = await NexoraAPI.request(`/competitions/${id}`);
+        const c = res.competition;
+
+        document.getElementById('detailTitle').textContent = c.title;
+        document.getElementById('detailDept').textContent = c.department;
+        document.getElementById('detailDesc').textContent = c.description;
+        document.getElementById('detailSlots').textContent = `${c.currentParticipants || 0} / ${c.participantLimit || 100}`;
+        document.getElementById('detailVersion').textContent = `v${c.currentVersion || '1.0'}`;
+        document.getElementById('detailDeadline').textContent = new Date(c.initialDeadline).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+        const enrollBtn = document.getElementById('enrollActionBtn');
+        const wsLink = document.getElementById('workspaceDirectLink');
+
+        if (res.userEnrollment) {
+          enrollBtn.textContent = 'Already Enrolled — Launch Workspace';
+          enrollBtn.onclick = () => window.location.href = `/workspace.html?id=${c.id}`;
+        } else {
+          enrollBtn.onclick = () => openJoinModal(c.id, c.title);
+        }
+      } catch (err) {
+        showToast('Failed to load competition details: ' + err.message, 'error');
+      }
+    });
+  </script>
+</body>
+</html>

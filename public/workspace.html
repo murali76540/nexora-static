@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Challenge Workspace — NEXORA | E.G.S. Pillay Engineering College</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <style>
+    /* 8-Stage Workspace Mini Progress Tracker */
+    .stage-tracker {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin: 1.5rem 0 2.5rem;
+      padding: 0 1rem;
+    }
+    .stage-tracker::before {
+      content: '';
+      position: absolute;
+      top: 15px;
+      left: 2rem;
+      right: 2rem;
+      height: 2px;
+      background: var(--border-subtle);
+      z-index: 1;
+    }
+    .stage-step {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .step-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 2px solid var(--border-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+    .stage-step.active .step-circle {
+      background: var(--primary-blue);
+      border-color: #60A5FA;
+      color: #FFFFFF;
+      box-shadow: 0 0 12px rgba(37, 99, 235, 0.5);
+    }
+    .stage-step.completed .step-circle {
+      background: var(--success-emerald);
+      border-color: #34D399;
+      color: #FFFFFF;
+    }
+    .step-title {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .stage-step.active .step-title {
+      color: var(--accent-cyan);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Disruption Broadcast Alert Banner -->
+  <div id="wsDisruptionAlert" style="display: none; background: #EF4444; color: #FFFFFF; padding: 0.85rem 1.5rem; font-size: 0.9rem; text-align: center; font-weight: 700; animation: pulse-border 2s infinite;">
+    ⚡ CRITICAL DISRUPTION DETECTED: Problem Version 2.0 has been released! Adapt your solution below.
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="/index.html" class="navbar-brand">
+      <div class="brand-logo-mark">N</div>
+      <div class="brand-text-wrap">
+        <span class="brand-name">NEXORA</span>
+        <span class="brand-subtext">Challenge Workspace</span>
+      </div>
+    </a>
+    <div class="nav-actions">
+      <span id="wsStageBadge" class="badge badge-cyan">Stage 03: Pathway</span>
+      <button class="theme-toggle-btn" title="Toggle Theme">🌓</button>
+      <a href="/dashboard.html?tab=member" class="btn btn-outline btn-sm">Member Dashboard</a>
+    </div>
+  </nav>
+
+  <!-- Workspace Container -->
+  <main class="container" style="padding: 2.5rem 1.5rem 5rem;">
+
+    <!-- Workspace Header -->
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        <div style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem;">
+          <span id="wsDept" class="badge badge-blue">Department</span>
+          <span id="wsVersion" class="badge badge-emerald">Problem Ver: 1.0</span>
+        </div>
+        <h1 id="wsTitle" style="font-size: 2rem; line-height: 1.25;">Challenge Title</h1>
+      </div>
+      <div class="card" style="padding: 0.85rem 1.25rem; display: flex; align-items: center; gap: 1rem;">
+        <div>
+          <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Active Deadline</div>
+          <div id="wsDeadline" class="font-mono" style="font-size: 1rem; font-weight: 700; color: var(--warning-amber);">Nov 05, 2026</div>
+        </div>
+        <div style="font-size: 1.5rem;">⏳</div>
+      </div>
+    </div>
+
+    <!-- 8-Stage Chronological Lifecycle Mini Progress Tracker -->
+    <div class="stage-tracker">
+      <div class="stage-step completed">
+        <div class="step-circle">01</div>
+        <div class="step-title">Enrolled</div>
+      </div>
+      <div class="stage-step completed">
+        <div class="step-circle">02</div>
+        <div class="step-title">V1.0 Released</div>
+      </div>
+      <div class="stage-step active">
+        <div class="step-circle">03</div>
+        <div class="step-title">Pathway</div>
+      </div>
+      <div class="stage-step">
+        <div class="step-circle">04</div>
+        <div class="step-title">Initial Sub</div>
+      </div>
+      <div class="stage-step">
+        <div class="step-circle">05</div>
+        <div class="step-title">Disruption</div>
+      </div>
+      <div class="stage-step">
+        <div class="step-circle">06</div>
+        <div class="step-title">Alert Diff</div>
+      </div>
+      <div class="stage-step">
+        <div class="step-circle">07</div>
+        <div class="step-title">Revision</div>
+      </div>
+      <div class="stage-step">
+        <div class="step-circle">08</div>
+        <div class="step-title">Results</div>
+      </div>
+    </div>
+
+    <!-- Problem Statement Specifications -->
+    <div class="card" style="margin-bottom: 2.5rem;">
+      <div class="card-header">
+        <div>
+          <h3 class="card-title">Problem Statement & Real-World Constraints</h3>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">Version 1.0 is permanently immutable once published.</div>
+        </div>
+        <div style="display: flex; gap: 0.5rem;">
+          <button class="btn btn-secondary btn-sm version-view-btn active" data-view="comparison">Side-by-Side Diff</button>
+          <button class="btn btn-secondary btn-sm version-view-btn" data-view="v1">V1.0 Baseline</button>
+          <button class="btn btn-secondary btn-sm version-view-btn" data-view="v2">V2.0 Disruption</button>
+        </div>
+      </div>
+
+      <!-- Side-by-side comparison (Stage 06 Diff) -->
+      <div class="diff-viewer">
+        <!-- V1 Column -->
+        <div id="v1Card" class="diff-col">
+          <div class="diff-col-header">
+            <span class="diff-badge-v1">VERSION 1.0 (BASELINE)</span>
+            <span class="badge badge-emerald">Permanent Immutable</span>
+          </div>
+          <h4 id="v1Title" style="font-size: 1.1rem;">Initial Specifications</h4>
+          <p id="v1Background" style="font-size: 0.85rem; color: var(--text-secondary);"></p>
+          <div class="diff-body" id="v1Statement"></div>
+          <div>
+            <strong style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted);">Technical Requirements:</strong>
+            <ul id="v1Requirements" style="margin-top: 0.4rem; padding-left: 1.25rem; font-size: 0.85rem; color: var(--text-secondary);"></ul>
+          </div>
+          <div>
+            <strong style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted);">Operational Constraints:</strong>
+            <ul id="v1Constraints" style="margin-top: 0.4rem; padding-left: 1.25rem; font-size: 0.85rem; color: var(--text-secondary);"></ul>
+          </div>
+        </div>
+
+        <!-- V2 Column (Disruption) -->
+        <div id="v2Card" class="diff-col">
+          <div class="diff-col-header">
+            <span class="diff-badge-v2">VERSION 2.0 (UNEXPECTED SHIFT)</span>
+            <span id="v2ImpactBadge" class="badge badge-impact-critical">IMPACT: CRITICAL</span>
+          </div>
+          <h4 id="v2Title" style="font-size: 1.1rem; color: #F87171;">Disruption Alert</h4>
+          <div class="diff-highlight">
+            <p id="v2Statement" style="color: var(--text-primary); font-weight: 500;"></p>
+          </div>
+          <div>
+            <strong style="font-size: 0.8rem; text-transform: uppercase; color: #F87171;">New Disruptive Constraints:</strong>
+            <ul id="v2Requirements" style="margin-top: 0.4rem; padding-left: 1.25rem; font-size: 0.85rem;"></ul>
+          </div>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">
+            <strong>Engineering Rationale:</strong>
+            <span id="v2Explanation"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pathway Selection & Forms -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem;">
+      
+      <!-- STAGE 04: INITIAL SUBMISSION FORM -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Stage 04: Initial Solution Submission</h3>
+          <span class="badge badge-blue">Baseline Solution</span>
+        </div>
+
+        <form id="initialSubmissionForm">
+          <!-- Pathway Selection -->
+          <div class="form-group">
+            <label class="form-label">Chosen Problem-Solving Pathway</label>
+            <div style="display: flex; gap: 1rem; margin-top: 0.25rem;">
+              <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer; font-size: 0.85rem;">
+                <input type="radio" name="wsPathway" value="AI_ASSISTED" checked> Pathway A (AI-Assisted)
+              </label>
+              <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer; font-size: 0.85rem;">
+                <input type="radio" name="wsPathway" value="WITHOUT_AI"> Pathway B (Without AI)
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Solution Title</label>
+            <input type="text" id="initSolutionTitle" class="form-input" placeholder="e.g. Resilient Edge Controller v1" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Technical Approach & System Architecture</label>
+            <textarea id="initTechnicalApproach" class="form-textarea" rows="3" placeholder="Explain the high-level architecture..." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Algorithm & Implementation Methodology</label>
+            <textarea id="initMethodology" class="form-textarea" rows="3" placeholder="Mathematical model, algorithm complexity, data structures..." required></textarea>
+          </div>
+
+          <!-- Pathway A Fields -->
+          <div id="aiAssistedFields" style="background: rgba(37, 99, 235, 0.05); padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); margin-bottom: 1.25rem;">
+            <div style="font-size: 0.8rem; font-weight: 700; color: var(--accent-cyan); margin-bottom: 0.5rem;">Pathway A AI Declaration:</div>
+            <div class="form-group">
+              <label class="form-label">AI Tools Used</label>
+              <input type="text" id="aiToolsUsed" class="form-input" placeholder="e.g. Gemini 1.5 Pro, Claude 3.5, Cursor">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Prompts Submitted & AI Contributions</label>
+              <textarea id="aiPromptsSubmitted" class="form-textarea" rows="2" placeholder="List specific prompts submitted to AI..."></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Human Modifications & Verification Steps</label>
+              <textarea id="aiHumanModifications" class="form-textarea" rows="2" placeholder="How did you verify AI suggestions against real-world constraints?"></textarea>
+            </div>
+          </div>
+
+          <!-- Pathway B Fields -->
+          <div id="withoutAiFields" style="display: none; background: rgba(6, 182, 212, 0.05); padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); margin-bottom: 1.25rem;">
+            <div style="font-size: 0.8rem; font-weight: 700; color: var(--accent-cyan); margin-bottom: 0.5rem;">Pathway B Independent Approach:</div>
+            <div class="form-group">
+              <label class="form-label">Algorithm & Mathematical Logic</label>
+              <textarea id="noAiLogic" class="form-textarea" rows="2" placeholder="Describe native mathematical algorithm..."></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Engineering Implementation</label>
+              <textarea id="noAiImplementation" class="form-textarea" rows="2" placeholder="Native code structures and memory optimizations..."></textarea>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">GitHub / Git Repository URL</label>
+            <input type="url" id="initRepoUrl" class="form-input font-mono" placeholder="https://github.com/egspec/project-solution" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full">
+            Submit Initial Solution (Stage 04)
+          </button>
+        </form>
+      </div>
+
+      <!-- STAGE 07: ADAPTIVE REVISION SUBMISSION -->
+      <div id="revisionSubmissionBox" class="card" style="border-left: 4px solid var(--danger-red);">
+        <div class="card-header">
+          <h3 class="card-title" style="color: #F87171;">Stage 07: Adaptive Solution Revision</h3>
+          <span class="badge badge-impact-critical">Version 2.0 Shift</span>
+        </div>
+
+        <form id="revisionSubmissionForm">
+          <div class="form-group">
+            <label class="form-label">Revised Solution Title</label>
+            <input type="text" id="revSolutionTitle" class="form-input" placeholder="e.g. Resilient Edge Controller v2 (Offline Fallback)" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Adaptation Strategy (Critical Tie-Breaker)</label>
+            <textarea id="revAdaptationStrategy" class="form-textarea" rows="3" placeholder="How did you adapt your architecture to survive sensor failures/surges?" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Revised Algorithm & Implementation Methodology</label>
+            <textarea id="revRevisedMethodology" class="form-textarea" rows="2" placeholder="Detail updated mathematical models or fallback algorithms..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Explanation of Code & Architecture Changes</label>
+            <textarea id="revExplanationOfChanges" class="form-textarea" rows="3" placeholder="Detailed diff of code changes from Version 1.0 to Version 2.0..." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Updated Solution Description</label>
+            <textarea id="revUpdatedSolution" class="form-textarea" rows="3" placeholder="Revised system behavior under Version 2.0 disruption..." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Updated GitHub / Repository URL</label>
+            <input type="url" id="revRepoUrl" class="form-input font-mono" placeholder="https://github.com/egspec/project-solution/tree/v2-adaptive" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Testing & Verification Evidence</label>
+            <textarea id="revTestingEvidence" class="form-textarea" rows="2" placeholder="Unit test results, latency benchmarks under disruption simulation..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-danger btn-full">
+            Submit Adaptive Revision (Stage 07)
+          </button>
+        </form>
+      </div>
+
+    </div>
+
+    <!-- Cryptographic Submission History & Receipt Viewer -->
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Cryptographic Receipts & Submission History</h3>
+        <span class="badge badge-emerald">Tamper-Proof Ledger</span>
+      </div>
+      <div id="submissionHistoryList">
+        <div style="color: var(--text-muted); font-size: 0.85rem;">Loading submission ledger...</div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Cryptographic Receipt Modal -->
+  <div id="receiptModal" class="modal-overlay">
+    <div class="modal-container">
+      <div class="card-header">
+        <h3 class="card-title">Institutional Submission Receipt</h3>
+        <button onclick="closeReceiptModal()" style="background:none; border:none; color:var(--text-muted); font-size:1.25rem; cursor:pointer;">✕</button>
+      </div>
+      <div class="receipt-card">
+        <div class="receipt-header">
+          <div>
+            <div style="font-size: 0.75rem; color: var(--text-muted);">RECEIPT IDENTIFIER</div>
+            <div id="modalReceiptId" class="receipt-id">NEX-SUB-20261102-XXXXXXXX</div>
+          </div>
+          <span class="badge badge-emerald">VALIDATED</span>
+        </div>
+        <div style="font-size: 0.8rem; margin-bottom: 0.75rem;">
+          <div style="color: var(--text-muted);">CANONICAL SHA-256 HASH</div>
+          <div id="modalReceiptHash" class="receipt-hash-row">Computing...</div>
+        </div>
+        <div style="font-size: 0.75rem; color: var(--text-muted);">
+          TIMESTAMP: <span id="modalReceiptTimestamp" class="font-mono"></span>
+        </div>
+      </div>
+      <div style="margin-top: 1.5rem; text-align: center;">
+        <button onclick="closeReceiptModal()" class="btn btn-primary">Close Receipt</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/firebase-config.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/workspace.js"></script>
+  <script src="/js/notifications.js"></script>
+</body>
+</html>

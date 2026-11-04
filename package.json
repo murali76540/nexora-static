@@ -1,0 +1,33 @@
+{
+  "name": "nexora",
+  "version": "1.0.0",
+  "description": "NEXORA — Real-World Engineering Problem-Solving Competition Platform by E.G.S. Pillay Engineering College, Nagapattinam",
+  "main": "backend/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node backend/server.js",
+    "test": "node --test tests/suite.test.js",
+    "test:mongo": "node backend/scripts/test-mongo.js",
+    "deploy:firebase": "firebase deploy --only hosting",
+    "deploy:vercel": "vercel --prod"
+  },
+  "keywords": [
+    "nexora",
+    "engineering-competition",
+    "egspec",
+    "ai-assisted",
+    "problem-solving",
+    "real-time-disruption"
+  ],
+  "author": "E.G.S. Pillay Engineering College",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": ">=2.4.3",
+    "cors": ">=2.8.5",
+    "dotenv": ">=16.4.7",
+    "express": ">=4.21.2",
+    "helmet": ">=8.0.0",
+    "mongodb": "^6.21.0"
+  }
+}

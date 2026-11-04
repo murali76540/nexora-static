@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login & Access Gateway — NEXORA | E.G.S. Pillay Engineering College</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body style="display: flex; flex-direction: column; min-height: 100vh;">
+
+  <!-- Institutional Top Bar -->
+  <div class="inst-topbar">
+    <div class="inst-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+      <span>E.G.S. Pillay Engineering College, Nagapattinam</span>
+    </div>
+    <div>Secure Unified Authentication</div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="/index.html" class="navbar-brand">
+      <div class="brand-logo-mark">N</div>
+      <div class="brand-text-wrap">
+        <span class="brand-name">NEXORA</span>
+        <span class="brand-subtext">Unified Access Gateway</span>
+      </div>
+    </a>
+    <div class="nav-actions">
+      <button class="theme-toggle-btn" title="Toggle Theme">🌓</button>
+      <a href="/register.html" class="btn btn-outline btn-sm">Create Member Account</a>
+    </div>
+  </nav>
+
+  <!-- Login Main Container -->
+  <main style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 3rem 1.5rem;">
+    <div class="card" style="max-width: 480px; width: 100%; padding: 2.25rem;">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <h2 style="font-size: 1.65rem; margin-bottom: 0.5rem;">Platform Access</h2>
+        <p style="font-size: 0.85rem; color: var(--text-secondary);">Select your designated category to enter NEXORA</p>
+      </div>
+
+      <!-- Unified 3-Tab Interface (Strictly 3 Options) -->
+      <div class="tabs-nav" style="margin-bottom: 1.75rem;">
+        <button class="tab-btn auth-tab-btn active" data-target="tabMember">
+          1. Member Login
+        </button>
+        <button class="tab-btn auth-tab-btn" data-target="tabOrganizer">
+          2. Organiser
+        </button>
+        <button class="tab-btn auth-tab-btn" data-target="tabAdmin">
+          3. Admin
+        </button>
+      </div>
+
+      <!-- PANE 1: MEMBER LOGIN -->
+      <div id="tabMember" class="auth-tab-pane tab-pane active">
+        <div id="memberLoginError" class="form-error" style="margin-bottom: 1rem; text-align: center;"></div>
+        <form id="memberLoginForm">
+          <div class="form-group">
+            <label class="form-label" for="memberEmail">College Email (@egspec.edu)</label>
+            <input type="email" id="memberEmail" class="form-input" placeholder="student.id@egspec.edu" required autocomplete="email">
+            <span class="form-hint">Only institutional @egspec.edu email addresses allowed.</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="memberPassword">Password</label>
+            <div class="input-with-action">
+              <input type="password" id="memberPassword" class="form-input" placeholder="••••••••" required autocomplete="current-password">
+              <button type="button" class="input-action-btn password-toggle-btn" data-target="memberPassword" title="Toggle Password">👁️</button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full" style="margin-top: 1rem;">
+            Sign In to Member Dashboard
+          </button>
+        </form>
+
+        <div style="text-align: center; margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted);">
+          New to NEXORA? <a href="/register.html" style="color: var(--accent-cyan); text-decoration: none; font-weight: 600;">Create Member Account</a>
+        </div>
+      </div>
+
+      <!-- PANE 2: ORGANISER ACCESS -->
+      <div id="tabOrganizer" class="auth-tab-pane tab-pane">
+        <div id="organizerLoginError" class="form-error" style="margin-bottom: 1rem; text-align: center;"></div>
+        <div style="background: rgba(37, 99, 235, 0.08); border-left: 3px solid var(--primary-blue); padding: 0.75rem; border-radius: var(--radius-sm); margin-bottom: 1.25rem; font-size: 0.75rem; color: var(--text-secondary);">
+          <strong>Organiser Credentials Required:</strong> Protected by unique access key. Judges access evaluation via assigned Organizer permissions.
+        </div>
+        <form id="organizerLoginForm">
+          <div class="form-group">
+            <label class="form-label" for="organizerId">Organizer ID or Email</label>
+            <input type="text" id="organizerId" class="form-input" placeholder="ORG-COORDINATOR-01" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="organizerKey">Unique Organizer Access Key</label>
+            <div class="input-with-action">
+              <input type="password" id="organizerKey" class="form-input font-mono" placeholder="NEXORA-ORGANIZER-2026" required>
+              <button type="button" class="input-action-btn password-toggle-btn" data-target="organizerKey" title="Toggle Key">👁️</button>
+            </div>
+            <span class="form-hint">Development Default: <code class="font-mono" style="color: var(--accent-cyan);">NEXORA-ORGANIZER-2026</code></span>
+          </div>
+
+          <button type="submit" class="btn btn-cyan btn-full" style="margin-top: 1rem;">
+            Unlock Organizer Dashboard
+          </button>
+        </form>
+      </div>
+
+      <!-- PANE 3: ADMIN ACCESS -->
+      <div id="tabAdmin" class="auth-tab-pane tab-pane">
+        <div id="adminLoginError" class="form-error" style="margin-bottom: 1rem; text-align: center;"></div>
+        <div style="background: rgba(239, 68, 68, 0.08); border-left: 3px solid var(--danger-red); padding: 0.75rem; border-radius: var(--radius-sm); margin-bottom: 1.25rem; font-size: 0.75rem; color: var(--text-secondary);">
+          <strong>Institutional Governance:</strong> Admin access key cannot unlock Organizer Dashboard. All access attempts are recorded in the security audit ledger.
+        </div>
+        <form id="adminLoginForm">
+          <div class="form-group">
+            <label class="form-label" for="adminId">Admin ID or Email</label>
+            <input type="text" id="adminId" class="form-input" placeholder="ADM-SUPERVISOR-01" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="adminKey">Unique Admin Access Key</label>
+            <div class="input-with-action">
+              <input type="password" id="adminKey" class="form-input font-mono" placeholder="NEXORA-ADMIN-2026" required>
+              <button type="button" class="input-action-btn password-toggle-btn" data-target="adminKey" title="Toggle Key">👁️</button>
+            </div>
+            <span class="form-hint">Development Default: <code class="font-mono" style="color: #F87171;">NEXORA-ADMIN-2026</code></span>
+          </div>
+
+          <button type="submit" class="btn btn-danger btn-full" style="margin-top: 1rem;">
+            Unlock Administrator Dashboard
+          </button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- Institutional Footer -->
+  <footer class="footer" style="padding: 2rem 0;">
+    <div class="container" style="text-align: center; color: var(--text-muted); font-size: 0.8rem;">
+      E.G.S. Pillay Engineering College, Nagapattinam &bull; NEXORA Platform Authentication
+    </div>
+  </footer>
+
+  <script src="/js/firebase-config.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/auth.js"></script>
+</body>
+</html>

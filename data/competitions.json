@@ -1,0 +1,20 @@
+[
+  [
+    "comp-1793634709953-64nnxb",
+    {
+      "id": "comp-1793634709953-64nnxb",
+      "title": "Quantum Key Distribution Sprint",
+      "department": "CSE",
+      "category": "General Engineering",
+      "description": "BB84 simulation.",
+      "participantLimit": 100,
+      "currentParticipants": 1,
+      "status": "ACTIVE",
+      "currentVersion": "1.0",
+      "startTime": "2026-11-02T15:51:44.953Z",
+      "initialDeadline": "2026-11-05T15:51:49.953Z",
+      "revisedDeadline": null,
+      "createdAt": "2026-11-02T15:51:49.953Z"
+    }
+  ]
+]

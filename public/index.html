@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXORA — Real-World Engineering Problem-Solving Competition Platform</title>
+  <meta name="description" content="NEXORA is a real-world engineering problem-solving competition platform where students solve industry challenges using AI-assisted or independent approaches. By E.G.S. Pillay Engineering College.">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+
+  <!-- Institutional Top Bar -->
+  <div class="inst-topbar">
+    <div class="inst-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+      <span>E.G.S. Pillay Engineering College, Nagapattinam (Autonomous)</span>
+    </div>
+    <div>Think. Solve. Adapt. Grow.</div>
+  </div>
+
+  <!-- Main Navigation -->
+  <nav class="navbar">
+    <a href="/index.html" class="navbar-brand">
+      <div class="brand-logo-mark">N</div>
+      <div class="brand-text-wrap">
+        <span class="brand-name">NEXORA</span>
+        <span class="brand-subtext">Engineering Challenge Engine</span>
+      </div>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="/index.html" class="nav-link active">Home</a></li>
+      <li><a href="/competitions.html" class="nav-link">Competitions</a></li>
+      <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+      <li><a href="/rules.html" class="nav-link">Rules & Rubric</a></li>
+      <li><a href="/results.html" class="nav-link">Leaderboard</a></li>
+      <li><a href="/about.html" class="nav-link">About EGSPEC</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <button class="theme-toggle-btn" title="Toggle Theme" aria-label="Toggle theme">🌓</button>
+      <div id="navAuthActions">
+        <a href="/login.html" class="btn btn-outline btn-sm">Login</a>
+        <a href="/register.html" class="btn btn-primary btn-sm">Join Competition</a>
+      </div>
+      <button class="mobile-menu-toggle" aria-label="Open navigation menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- Section 2: Hero -->
+  <header style="padding: 5.5rem 0 4rem; text-align: center; position: relative;">
+    <div class="container container-narrow">
+      <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem;" class="badge badge-cyan">
+        <span>⚡ Industry 4.0 Adaptive Problem Solving</span>
+      </div>
+      <h1 style="font-size: clamp(2.2rem, 5vw, 3.75rem); line-height: 1.15; margin-bottom: 1.5rem; letter-spacing: -0.03em;">
+        Real Problems. Intelligent Solutions. <br>
+        <span class="text-gradient">Limitless Adaptability.</span>
+      </h1>
+      <p style="font-size: 1.15rem; color: var(--text-secondary); margin-bottom: 2.25rem; max-width: 680px; margin-inline: auto;">
+        Challenge your engineering thinking. Solve unpredictable real-world problems with or without AI. Adapt when requirements shift in real time.
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="/competitions.html" class="btn btn-primary btn-lg">Explore Competitions</a>
+        <a href="#how-it-works" class="btn btn-secondary btn-lg">How It Works</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Section 3: Eight-Stage Workflow -->
+  <section id="how-it-works" class="workflow-section" style="background: var(--bg-secondary); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+    <div class="container">
+      <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+        <span class="badge badge-blue">Chronological Competition Lifecycle</span>
+        <h2 style="font-size: 2.2rem; margin: 0.8rem 0;">Eight-Stage Engineering Journey</h2>
+        <p>From initial problem discovery to unexpected operational disruptions, participants navigate real-world engineering chaos.</p>
+      </div>
+
+      <div class="workflow-grid">
+        <!-- Stage 01 -->
+        <div class="workflow-card">
+          <div class="workflow-stage-num">
+            <span>STAGE 01</span>
+            <span class="badge badge-blue">Enroll</span>
+          </div>
+          <div class="workflow-icon">🔍</div>
+          <h3 class="workflow-title">Discovery & Registration</h3>
+          <p class="workflow-desc">Explore challenges, inspect eligibility, verify remaining slots (max 100), and join with institutional credentials.</p>
+        </div>
+
+        <!-- Stage 02 -->
+        <div class="workflow-card">
+          <div class="workflow-stage-num">
+            <span>STAGE 02</span>
+            <span class="badge badge-blue">V1.0</span>
+          </div>
+          <div class="workflow-icon">📋</div>
+          <h3 class="workflow-title">Problem Statement Release</h3>
+          <p class="workflow-desc">Organizers publish Version 1.0 specifications and constraints. Becomes permanently immutable once published.</p>
+        </div>
+
+        <!-- Stage 03 -->
+        <div class="workflow-card">
+          <div class="workflow-stage-num">
+            <span>STAGE 03</span>
+            <span class="badge badge-cyan">Pathway</span>
+          </div>
+          <div class="workflow-icon">⚖️</div>
+          <h3 class="workflow-title">Pathway Selection</h3>
+          <p class="workflow-desc">Choose Pathway A (AI-Assisted) or Pathway B (Without AI). Evaluated under identical standardized rubric.</p>
+        </div>
+
+        <!-- Stage 04 -->
+        <div class="workflow-card">
+          <div class="workflow-stage-num">
+            <span>STAGE 04</span>
+            <span class="badge badge-emerald">Initial</span>
+          </div>
+          <div class="workflow-icon">🚀</div>
+          <h3 class="workflow-title">Initial Solution Submission</h3>
+          <p class="workflow-desc">Submit repository, architecture and declarations. Receive cryptographic receipt (NEX-SUB-YYYYMMDD-XXXXXXXX).</p>
+        </div>
+
+        <!-- Stage 05 -->
+        <div class="workflow-card" style="border-color: rgba(239, 68, 68, 0.4);">
+          <div class="workflow-stage-num">
+            <span style="color: #F87171;">STAGE 05</span>
+            <span class="badge badge-impact-critical">Shift</span>
+          </div>
+          <div class="workflow-icon" style="background: var(--danger-red-soft); color: var(--danger-red);">⚡</div>
+          <h3 class="workflow-title">Unexpected Problem Shift</h3>
+          <p class="workflow-desc">Organizers drop Version 2.0: sensor failures, power outages, and resource restrictions. V1 remains immutable.</p>
+        </div>
+
+        <!-- Stage 06 -->
+        <div class="workflow-card">
+          <div class="workflow-stage-num">
+            <span>STAGE 06</span>
+            <span class="badge badge-amber">Live Alert</span>
+          </div>
+          <div class="workflow-icon">🔔</div>
+          <h3 class="workflow-title">Real-Time Disruption Notification</h3>
+          <p class="workflow-desc">Instant real-time broadcast with side-by-side V1 vs V2 diff highlighting new operational bottlenecks.</p>
+        </div>
+
+        <!-- Stage 07 -->
+        <div class="workflow-card">
+          <div class="workflow-stage-num">
+            <span>STAGE 07</span>
+            <span class="badge badge-emerald">Revision</span>
+          </div>
+          <div class="workflow-icon">🔄</div>
+          <h3 class="workflow-title">Adaptive Solution Revision</h3>
+          <p class="workflow-desc">Adapt existing architecture to new constraints. Submit revision receipt (NEX-REV-YYYYMMDD-XXXXXXXX).</p>
+        </div>
+
+        <!-- Stage 08 -->
+        <div class="workflow-card">
+          <div class="workflow-stage-num">
+            <span>STAGE 08</span>
+            <span class="badge badge-cyan">Results</span>
+          </div>
+          <div class="workflow-icon">🏆</div>
+          <h3 class="workflow-title">Evaluation & Results</h3>
+          <p class="workflow-desc">Seven weighted criteria with Adaptability tie-breaker. Leaderboards remain hidden until official publication.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Active Competitions -->
+  <section style="padding: 5rem 0;">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <span class="badge badge-cyan">Featured Challenges</span>
+          <h2 style="font-size: 2rem; margin-top: 0.5rem;">Active Engineering Competitions</h2>
+        </div>
+        <a href="/competitions.html" class="btn btn-outline btn-sm">View All Competitions &rarr;</a>
+      </div>
+
+      <div id="featuredCompetitionsGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+        <!-- Injected via JavaScript from Firestore -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Two Pathways Comparison -->
+  <section style="background: var(--bg-secondary); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 5rem 0;">
+    <div class="container">
+      <div style="text-align: center; max-width: 700px; margin: 0 auto 3.5rem;">
+        <span class="badge badge-blue">Pathway Integrity</span>
+        <h2 style="font-size: 2.2rem; margin-top: 0.5rem;">Two Pathways. Equal Honor.</h2>
+        <p>Both pathways are evaluated on identical seven-criteria standards. Neither pathway is favored.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+        <!-- Pathway A -->
+        <div class="card" style="border-left: 4px solid var(--primary-blue);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <span class="badge badge-blue">PATHWAY A</span>
+            <span style="font-size: 1.25rem;">🤖</span>
+          </div>
+          <h3 style="font-size: 1.35rem; margin-bottom: 0.75rem;">AI-Assisted Problem Solving</h3>
+          <p style="margin-bottom: 1.25rem;">Leverage modern LLMs and AI code engines while demonstrating rigorous verification, prompt engineering, and human-in-the-loop oversight.</p>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.65rem; font-size: 0.875rem; color: var(--text-secondary);">
+            <li>✓ Disclose AI tools and prompts submitted</li>
+            <li>✓ Detail human modifications and prompt refinement</li>
+            <li>✓ Provide strict verification & test coverage</li>
+            <li>✓ Evaluated under Pathway Integrity (10%)</li>
+          </ul>
+        </div>
+
+        <!-- Pathway B -->
+        <div class="card" style="border-left: 4px solid var(--accent-cyan);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <span class="badge badge-cyan">PATHWAY B</span>
+            <span style="font-size: 1.25rem;">🧠</span>
+          </div>
+          <h3 style="font-size: 1.35rem; margin-bottom: 0.75rem;">Without AI (Pure Engineering)</h3>
+          <p style="margin-bottom: 1.25rem;">Tackle problems using first-principles logic, mathematical modeling, native algorithms, and independent algorithmic thinking.</p>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.65rem; font-size: 0.875rem; color: var(--text-secondary);">
+            <li>✓ Pure algorithmic reasoning & data structures</li>
+            <li>✓ In-depth mathematical and engineering proofs</li>
+            <li>✓ Native test benches and boundary conditions</li>
+            <li>✓ Evaluated under Pathway Integrity (10%)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Standardized Seven Evaluation Criteria -->
+  <section style="padding: 5rem 0;">
+    <div class="container container-narrow">
+      <div style="text-align: center; margin-bottom: 3rem;">
+        <span class="badge badge-emerald">Standardized Scoring System</span>
+        <h2 style="font-size: 2.2rem; margin-top: 0.5rem;">Seven-Criteria Weighted Rubric</h2>
+        <p>A mathematically normalized 100% evaluation matrix with an Adaptability tie-breaker.</p>
+      </div>
+
+      <div class="card" style="padding: 2rem;">
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-subtle);">
+            <div>
+              <strong>1. Problem Understanding</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Root cause identification, real-world context mastery</div>
+            </div>
+            <span class="badge badge-blue">15% Weight</span>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-subtle);">
+            <div>
+              <strong>2. Technical Depth</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Engineering architecture, algorithm complexity & logic</div>
+            </div>
+            <span class="badge badge-blue">15% Weight</span>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-subtle); background: rgba(245, 158, 11, 0.05); border-radius: var(--radius-sm); padding: 0.75rem;">
+            <div>
+              <strong style="color: var(--warning-amber);">3. Adaptability to Problem Shift (CRITICAL)</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Response to Version 2.0 disruption; primary tie-breaker</div>
+            </div>
+            <span class="badge badge-amber">20% Weight (Tie-Breaker)</span>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-subtle);">
+            <div>
+              <strong>4. Code Completeness</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Executable quality, error handling, repository structure</div>
+            </div>
+            <span class="badge badge-blue">15% Weight</span>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-subtle);">
+            <div>
+              <strong>5. Practical Feasibility</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Deployability, cost considerations, hardware constraints</div>
+            </div>
+            <span class="badge badge-blue">15% Weight</span>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-subtle);">
+            <div>
+              <strong>6. Pathway Integrity</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Transparency in AI declarations or pure engineering logic</div>
+            </div>
+            <span class="badge badge-cyan">10% Weight</span>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <strong>7. Innovation</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Novelty of approach, out-of-the-box resilience mechanism</div>
+            </div>
+            <span class="badge badge-cyan">10% Weight</span>
+          </div>
+        </div>
+
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-strong); display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-weight: 700;">Total Composite Score</span>
+          <span class="badge badge-emerald" style="font-size: 0.85rem;">100% Complete</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: Institutional Banner -->
+  <section style="background: linear-gradient(135deg, #172033 0%, #0B0F19 100%); border-top: 1px solid var(--border-subtle); padding: 4rem 0; text-align: center;">
+    <div class="container container-narrow">
+      <h3 style="font-size: 1.75rem; margin-bottom: 0.75rem;">Powered by E.G.S. Pillay Engineering College, Nagapattinam</h3>
+      <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">An Autonomous Institution Accredited with 'A' Grade by NAAC. Fostering real-world engineering excellence through adaptive challenge competitions.</p>
+      <a href="/register.html" class="btn btn-primary btn-md">Register with @egspec.edu Email</a>
+    </div>
+  </section>
+
+  <!-- Section 8: Institutional Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-name">NEXORA</div>
+          <p class="footer-tagline">Think. Solve. Adapt. Grow.</p>
+          <div class="footer-college">E.G.S. Pillay Engineering College, Nagapattinam</div>
+          <p style="font-size: 0.8rem; margin-top: 0.5rem; color: var(--text-muted);">Nagore Post, Nagapattinam - 611002, Tamil Nadu, India.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/competitions.html">Competitions</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="/results.html">Leaderboard</a></li>
+            <li><a href="/about.html">About Institution</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Platform Access</h4>
+          <ul class="footer-links">
+            <li><a href="/login.html">Member Login</a></li>
+            <li><a href="/login.html">Organiser Access</a></li>
+            <li><a href="/login.html">Admin Access</a></li>
+            <li><a href="/register.html">Student Registration</a></li>
+            <li><a href="/rules.html">Competition Rules</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Institutional Contact</h4>
+          <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+            Department of Academic Competitions & Industry Collaborations
+          </p>
+          <div class="font-mono" style="font-size: 0.8rem; color: var(--accent-cyan);">nexora@egspec.edu</div>
+          <div class="font-mono" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">+91 (04365) 251112</div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 NEXORA — E.G.S. Pillay Engineering College. All rights reserved.</div>
+        <div>Engineered for Real-World Problem Solving</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Enrollment Modal -->
+  <div id="joinModal" class="modal-overlay">
+    <div class="modal-container">
+      <div class="card-header">
+        <h3 class="card-title">Enroll in Challenge</h3>
+        <button onclick="closeJoinModal()" style="background: none; border: none; color: var(--text-muted); font-size: 1.25rem; cursor: pointer;">✕</button>
+      </div>
+      <p id="joinModalCompTitle" style="font-weight: 600; color: var(--accent-cyan); margin-bottom: 1.5rem;"></p>
+      
+      <div class="form-group">
+        <label class="form-label">Select Problem-Solving Pathway</label>
+        <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.5rem;">
+          <label style="display: flex; align-items: flex-start; gap: 0.75rem; background: var(--bg-secondary); padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); cursor: pointer;">
+            <input type="radio" name="selectedPathway" value="AI_ASSISTED" checked style="margin-top: 0.25rem;">
+            <div>
+              <strong>Pathway A: AI-Assisted</strong>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Use LLMs/AI with full prompt disclosure & verification</div>
+            </div>
+          </label>
+
+          <label style="display: flex; align-items: flex-start; gap: 0.75rem; background: var(--bg-secondary); padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); cursor: pointer;">
+            <input type="radio" name="selectedPathway" value="WITHOUT_AI" style="margin-top: 0.25rem;">
+            <div>
+              <strong>Pathway B: Without AI</strong>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Pure engineering, native algorithm & mathematical logic</div>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+        <button onclick="closeJoinModal()" class="btn btn-secondary" style="flex: 1;">Cancel</button>
+        <button id="confirmJoinBtn" onclick="confirmJoinCompetition()" class="btn btn-primary" style="flex: 2;">Confirm Enrollment</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/firebase-config.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/competitions.js"></script>
+  <script src="/js/notifications.js"></script>
+</body>
+</html>

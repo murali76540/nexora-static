@@ -1,0 +1,119 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    function hasRole(role) {
+      return isAuthenticated() && getUserData().role == role;
+    }
+
+    function isOrganizer() {
+      return hasRole('organizer') || hasRole('admin');
+    }
+
+    function isAdmin() {
+      return hasRole('admin');
+    }
+
+    function isCollegeEmail() {
+      return request.auth.token.email.matches('.*@egspec\\.edu$');
+    }
+
+    // 1. Users collection
+    match /users/{userId} {
+      allow read: if isAuthenticated() && (request.auth.uid == userId || isOrganizer() || isAdmin());
+      // Public registration can only set participant role
+      allow create: if isAuthenticated() && 
+                    request.auth.uid == userId && 
+                    request.resource.data.role == 'participant' &&
+                    isCollegeEmail();
+      // Users can update basic profile; only admin can change roles
+      allow update: if isAuthenticated() && 
+                    ((request.auth.uid == userId && !('role' in request.resource.data.diff(resource.data).affectedKeys())) || isAdmin());
+      allow delete: if isAdmin();
+    }
+
+    // 2. Competitions collection
+    match /competitions/{competitionId} {
+      allow read: if true; // Publicly viewable catalog
+      allow create, update, delete: if isOrganizer() || isAdmin();
+    }
+
+    // 3. Competition Members (enrollments)
+    match /competitionMembers/{memberId} {
+      allow read: if isAuthenticated() && (resource.data.userId == request.auth.uid || isOrganizer() || isAdmin());
+      allow create: if isAuthenticated() && 
+                    request.resource.data.userId == request.auth.uid &&
+                    request.resource.data.role == 'participant';
+      allow update, delete: if isOrganizer() || isAdmin();
+    }
+
+    // 4. Problem Versions collection (Immutable Version 1.0)
+    match /problemVersions/{versionId} {
+      allow read: if isAuthenticated();
+      // Only organizers/admins can publish problem versions
+      allow create: if isOrganizer() || isAdmin();
+      // Version 1.0 is permanently immutable once created
+      allow update: if (isOrganizer() || isAdmin()) && resource.data.versionNumber != '1.0';
+      allow delete: if false; // Versions must never be deleted
+    }
+
+    // 5. Submissions
+    match /submissions/{submissionId} {
+      allow read: if isAuthenticated() && (resource.data.userId == request.auth.uid || isOrganizer() || isAdmin());
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      // Participants can only update during submission phase; cannot alter verification hashes
+      allow update: if isAuthenticated() && (
+        (resource.data.userId == request.auth.uid && !('receiptHash' in request.resource.data.diff(resource.data).affectedKeys())) ||
+        isOrganizer() || isAdmin()
+      );
+      allow delete: if isAdmin();
+    }
+
+    // 6. Submission Receipts (Tamper-proof server receipts)
+    match /submissionReceipts/{receiptId} {
+      allow read: if isAuthenticated() && (resource.data.userId == request.auth.uid || isOrganizer() || isAdmin());
+      allow create, update, delete: if isOrganizer() || isAdmin(); // Only backend/privileged operations
+    }
+
+    // 7. Evaluations & Rubric Scoring
+    match /evaluations/{evaluationId} {
+      // Participants cannot read evaluations directly; results are exposed via sanitized leaderboard
+      allow read: if isOrganizer() || isAdmin();
+      allow create, update: if isOrganizer() || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // 8. Leaderboard Settings
+    match /leaderboardSettings/{competitionId} {
+      allow read: if true;
+      allow write: if isOrganizer() || isAdmin();
+    }
+
+    // 9. Notifications
+    match /notifications/{notificationId} {
+      allow read: if isAuthenticated() && (resource.data.userId == request.auth.uid || resource.data.broadcast == true);
+      allow create, update, delete: if isOrganizer() || isAdmin();
+    }
+
+    // 10. Audit Logs (Append-only by backend/admin)
+    match /auditLogs/{logId} {
+      allow read: if isAdmin();
+      allow create: if isAuthenticated();
+      allow update, delete: if false; // Append-only immutable log
+    }
+
+    // 11. Sessions & Access Credentials
+    match /accessCredentials/{credId} {
+      allow read, write: if false; // Server-only, strictly forbidden for client SDK
+    }
+  }
+}
